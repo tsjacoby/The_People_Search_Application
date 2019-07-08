@@ -7,7 +7,7 @@
 	<body>
 		<div class="peopleSearchApp" ng-app="peopleSearchApp" ng-controller="peopleSearchController">
 			<form class="searcher">
-				<input ng-model="searchText" />
+				<input maxlength="32" ng-model="searchText" />
 				<button type="submit" ng-click="search()">Search</button>
 			</form>
 			<div ng-show="!searchFailed">
