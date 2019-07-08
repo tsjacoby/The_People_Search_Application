@@ -1,0 +1,36 @@
+<html>
+	<head>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+		<script src="index.js"></script>
+		<link rel="stylesheet" href="index.css">
+	</head>
+	<body>
+		<div class="peopleSearchApp" ng-app="peopleSearchApp" ng-controller="peopleSearchController">
+			<form class="searcher">
+				<input ng-model="searchText" />
+				<button type="submit" ng-click="search()">Search</button>
+			</form>
+			<div ng-show="!searchFailed">
+				<ol>
+					<li ng-repeat="searchResult in searchResults">
+						<div class="searchResult">
+							<img ng-src="{{searchResult.pictureURL}}" />
+							<div class="searchResultSummary">
+								<div>Name: {{searchResult.name}}</div>
+								<div>Address: {{searchResult.address}}</div>
+								<div>Age: {{searchResult.age}}</div>
+								<div>Interests: {{searchResult.interests}}</div>
+							</div>
+						</div>
+					</li>
+				</ol>
+			</div>
+			<div ng-show="searchFailed">
+				The search failed.
+			</div>
+			<div class="uiBlocker" ng-show="isSearching">
+				<h1>searching...</h1>
+			</div>
+		</div>
+	</body>
+</html>

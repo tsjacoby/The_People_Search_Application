@@ -1,0 +1,43 @@
+body {
+	height: 100%;
+}
+
+.peopleSearchApp {
+	min-height: 100%;
+	position: relative;
+}
+
+.searcher {
+	text-align: center;
+}
+
+.searchResult {
+	border: 2px solid black;
+	margin-bottom: 2px;
+	display: flex;
+	flex-direction: row;
+}
+
+.searchResult img {
+	width: 100px;
+	height: 100px;
+}
+
+.searchResultSummary {
+	display: flex;
+	flex-direction: column;
+}
+
+.uiBlocker {
+	left: 0px;
+	top: 0px;
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	background-color: rgba(45, 45, 45, .75);
+	text-align: center;
+}
+
+.uiBlocker h1 {
+	color: white;
+}
