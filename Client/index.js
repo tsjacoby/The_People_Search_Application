@@ -1,7 +1,10 @@
+// Constants.
 let app = angular.module('peopleSearchApp', []);
 let serverURL = "https://localhost:5001/";
+let searchDelayInMS = 4000;
 
-let searchByText = (searchText) => {
+// Function that searches for people by name based on the given search text. Returns a promise containing the search results.
+let searchByName = (searchText) => {
 	if (searchText.length === 0) {
 		return Promise.resolve([]);
 	}
@@ -26,20 +29,34 @@ let searchByText = (searchText) => {
 	return requestPromise;
 };
 
+// Controller.
 app.controller('peopleSearchController', ($scope, $timeout) => {
-    $scope.searchText = "John";
+	// Function for setting whether or not the application is currently searching.
+	let setIsSearching = (isSearching) => {
+		$scope.isSearching = isSearching;
+		
+		// Disables keyboard input when searching so that users can't tab around the page when search
+		// is in progress.
+		document.onkeydown = (e) => {
+			return !isSearching;
+		};
+	};
+	
+    $scope.searchText = "Bob";
 	$scope.searchFailed = false;
 	$scope.search = () => {
-		$scope.isSearching = true;
-		searchByText($scope.searchText).then((searchResults) => {
-			$scope.searchResults = searchResults;
-			$scope.isSearching = false;
-			$scope.searchFailed = false;
-			$scope.$apply();
-		}).catch((reason) => {
-			$scope.isSearching = false;
-			$scope.searchFailed = true;
-			$scope.$apply();
-		});
+		setIsSearching(true);
+		$timeout(() => {
+			searchByName($scope.searchText).then((searchResults) => {
+				$scope.searchResults = searchResults;
+				setIsSearching(false);
+				$scope.searchFailed = false;
+				$scope.$apply();
+			}).catch((reason) => {
+				setIsSearching(false);
+				$scope.searchFailed = true;
+				$scope.$apply();
+			});
+		}, searchDelayInMS);
 	};
 });
