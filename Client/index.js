@@ -1,5 +1,5 @@
 let app = angular.module('peopleSearchApp', []);
-let serverURL = "https://localhost:5001/";
+let serverURL = "https://localhost:44381/";
 
 let searchByText = (searchText) => {
 	if (searchText.length === 0) {
